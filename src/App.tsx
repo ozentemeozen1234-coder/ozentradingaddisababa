@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 type Language = 'en' | 'am'
@@ -11,6 +11,13 @@ const content = {
     heroTitle: 'Connecting Ethiopia to Global Opportunities.',
     heroText:
       'Ozen Trading PLC is an Ethiopian multi-sector trading company focused on international trade, technology, investment and business services.',
+    showcaseLabel: 'OUR SECTORS IN FOCUS',
+    showcaseTitle: 'Ideas, industries and opportunities.',
+    showcaseText: 'Explore the sectors that shape our business focus, from global trade and technology to Ethiopian products and development.',
+    appLabel: 'A NEW WAY TO CONNECT',
+    appTitle: 'The OZEN App is on the way.',
+    appText: 'We are planning a dedicated digital experience to make it easier to discover OZEN services and connect with our team.',
+    appStatus: 'COMING SOON',
     explore: 'Explore Our Business',
     contact: 'Contact Us',
     aboutLabel: 'WHO WE ARE',
@@ -60,6 +67,13 @@ const content = {
     heroTitle: 'ኢትዮጵያን ከዓለም አቀፍ የንግድ ዕድሎች ጋር እናገናኛለን።',
     heroText:
       'ኦዘን ትሬዲንግ ኃ/የተ/የግ/ማ በዓለም አቀፍ ንግድ፣ ቴክኖሎጂ፣ ኢንቨስትመንት እና የንግድ አገልግሎቶች ላይ የሚያተኩር ኢትዮጵያዊ ድርጅት ነው።',
+    showcaseLabel: 'የምናተኩርባቸው ዘርፎች',
+    showcaseTitle: 'ሀሳቦች፣ ኢንዱስትሪዎችና ዕድሎች።',
+    showcaseText: 'ከዓለም አቀፍ ንግድና ቴክኖሎጂ እስከ ኢትዮጵያዊ ምርቶችና ልማት ድረስ የምናተኩርባቸውን ዘርፎች ይመልከቱ።',
+    appLabel: 'አዲስ የዲጂታል ግንኙነት',
+    appTitle: 'OZEN App በቅርቡ ይመጣል።',
+    appText: 'የOZEN አገልግሎቶችን ለማወቅና ከቡድናችን ጋር ለመገናኘት የሚያግዝ ልዩ የዲጂታል መድረክ እያቀድን ነው።',
+    appStatus: 'በቅርቡ ይመጣል',
     explore: 'የንግድ ዘርፎቻችንን ይመልከቱ',
     contact: 'ያግኙን',
     aboutLabel: 'ማን ነን?',
@@ -105,11 +119,65 @@ const content = {
   },
 }
 
+const showcaseSlides = [
+  {
+    title: 'Global Trade & Logistics',
+    amTitle: 'ዓለም አቀፍ ንግድና ሎጂስቲክስ',
+    description: 'Connecting markets through import, export and trade opportunities.',
+    amDescription: 'በማስመጣት፣ በመላክና በንግድ ዕድሎች ገበያዎችን ማገናኘት።',
+    image: 'https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Cargo containers and global shipping logistics',
+  },
+  {
+    title: 'Technology & IT',
+    amTitle: 'ቴክኖሎጂና IT',
+    description: 'Technology infrastructure, computing and network solutions.',
+    amDescription: 'የቴክኖሎጂ መሠረተ ልማት፣ ኮምፒውተርና የኔትወርክ መፍትሔዎች።',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Modern server racks in a data center',
+  },
+  {
+    title: 'Ethiopian Products & Textiles',
+    amTitle: 'የኢትዮጵያ ምርቶችና ጨርቃጨርቅ',
+    description: 'Showcasing the potential of Ethiopian leather, footwear and textiles.',
+    amDescription: 'የኢትዮጵያን የቆዳ ውጤቶች፣ ጫማዎችና ጨርቃጨርቅ ዕድሎች ማሳየት።',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Textile materials and fabric production',
+  },
+  {
+    title: 'Real Estate & Development',
+    amTitle: 'ሪል እስቴትና ልማት',
+    description: 'Exploring opportunities in property and industrial development.',
+    amDescription: 'በሪል እስቴትና በኢንዱስትሪ ልማት የሚገኙ ዕድሎችን መከታተል።',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Contemporary commercial architecture',
+  },
+  {
+    title: 'Railway & Industrial Equipment',
+    amTitle: 'ባቡርና የኢንዱስትሪ መሣሪያዎች',
+    description: 'Discovering equipment and infrastructure-related trade opportunities.',
+    amDescription: 'ከመሣሪያዎችና ከመሠረተ ልማት ጋር የተያያዙ የንግድ ዕድሎችን መፈለግ።',
+    image: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1600&q=85',
+    alt: 'Railway track and train infrastructure',
+  },
+]
+
 const icons = ['↗', '⇧', '⌘', '⌂', '⇄', '◇']
 const currentYear = new Date().getFullYear()
 function App() {
   const [language, setLanguage] = useState<Language>('en')
+  const [activeSlide, setActiveSlide] = useState(0)
   const t = content[language]
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % showcaseSlides.length)
+    }, 6000)
+
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const currentSlide = showcaseSlides[activeSlide]
 
   return (
     <main className={language === 'am' ? 'site amharic' : 'site'}>
@@ -137,6 +205,10 @@ function App() {
         >
           {language === 'en' ? 'አማ' : 'EN'}
         </button>
+        <a className="app-link" href="#app">
+          <span>OZEN App</span>
+          <small>{t.appStatus}</small>
+        </a>
       </header>
 
       <section className="hero-section" id="home">
@@ -161,6 +233,38 @@ function App() {
         <div className="hero-bottom">
           <span>ADDIS ABABA · MEKELE</span>
           <span>EST. WITH AMBITION</span>
+        </div>
+      </section>
+
+      <section className="showcase-section section-wrap" aria-label="Ozen business sectors">
+        <div className="showcase-heading">
+          <span className="section-label">{t.showcaseLabel}</span>
+          <h2>{t.showcaseTitle}</h2>
+          <p>{t.showcaseText}</p>
+        </div>
+        <div className="showcase-feature">
+          <img src={currentSlide.image} alt={currentSlide.alt} />
+          <div className="showcase-overlay">
+            <span className="showcase-count">0{activeSlide + 1} / 0{showcaseSlides.length}</span>
+            <h3>{language === 'am' ? currentSlide.amTitle : currentSlide.title}</h3>
+            <p>{language === 'am' ? currentSlide.amDescription : currentSlide.description}</p>
+          </div>
+          <div className="showcase-controls">
+            <button type="button" aria-label="Previous image" onClick={() => setActiveSlide((activeSlide - 1 + showcaseSlides.length) % showcaseSlides.length)}>‹</button>
+            <button type="button" aria-label="Next image" onClick={() => setActiveSlide((activeSlide + 1) % showcaseSlides.length)}>›</button>
+          </div>
+        </div>
+        <div className="showcase-dots" aria-label="Choose an image">
+          {showcaseSlides.map((slide, index) => (
+            <button
+              key={slide.title}
+              type="button"
+              className={index === activeSlide ? 'active' : ''}
+              aria-label={`Show image ${index + 1}`}
+              aria-pressed={index === activeSlide}
+              onClick={() => setActiveSlide(index)}
+            />
+          ))}
         </div>
       </section>
 
@@ -239,6 +343,21 @@ function App() {
             <h3>{t.mekele}</h3>
             <p>{t.mekeleAddress}</p>
           </article>
+        </div>
+      </section>
+
+      <section className="app-section" id="app">
+        <div className="section-wrap app-layout">
+          <div className="app-copy">
+            <span className="section-label">{t.appLabel}</span>
+            <h2>{t.appTitle}</h2>
+            <p>{t.appText}</p>
+            <span className="app-status">{t.appStatus}</span>
+          </div>
+          <div className="app-visual" aria-hidden="true">
+            <div className="app-phone app-phone-back"><span className="app-phone-mark">O</span><span>OZEN</span><small>TRADING PLC</small></div>
+            <div className="app-phone app-phone-front"><span className="app-phone-mark">O</span><span>OZEN</span><small>YOUR BUSINESS, CONNECTED</small><i /><i /><i /></div>
+          </div>
         </div>
       </section>
 
