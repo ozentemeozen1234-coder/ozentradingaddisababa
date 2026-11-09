@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 type Language = 'en' | 'am'
 
@@ -9,6 +9,15 @@ type Article = {
   amTitle: string
   summary: string
   amSummary: string
+}
+
+type EthiopiaPhoto = {
+  title: string
+  amTitle: string
+  image: string
+  alt: string
+  credit: string
+  source: string
 }
 
 const articles: Article[] = [
@@ -25,6 +34,92 @@ const articles: Article[] = [
   { id: 11, category: 'Economy & Opportunity', title: 'Textiles, Cotton and Creative Enterprise', amTitle: 'ጨርቃጨርቅ፣ ጥጥና የፈጠራ ንግድ', summary: 'Explore opportunities across textile production, design, skills and responsible trade.', amSummary: 'በጨርቃጨርቅ ምርት፣ ዲዛይን፣ ክህሎትና ኃላፊነት ባለው ንግድ ያሉ ዕድሎችን ያስሱ።' },
   { id: 12, category: 'Modern Ethiopia', title: 'Young Innovators and the Digital Future', amTitle: 'ወጣት ፈጣሪዎችና ዲጂታል የወደፊት ዕድል', summary: 'A look at entrepreneurship, technology and the ideas shaping tomorrow.', amSummary: 'ሥራ ፈጠራን፣ ቴክኖሎጂንና የነገውን ዓለም የሚቀርጹ ሐሳቦችን እንመለከታለን።' },
 ]
+
+
+const ethiopiaPhotos: EthiopiaPhoto[] = [
+  {
+    title: 'Coffee Ceremony in Lalibela',
+    amTitle: 'በላሊበላ የቡና ሥነ-ሥርዓት',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_ceremony%2C_Lalibela.jpg?width=1600',
+    alt: 'Traditional Ethiopian coffee ceremony in Lalibela',
+    credit: 'Niels Van Iperen · CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Coffee_ceremony,_Lalibela.jpg',
+  },
+  {
+    title: 'Bet Abba Libanos, Lalibela',
+    amTitle: 'ቤተ አባ ሊባኖስ፣ ላሊበላ',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Churches_of_Lalibela_-_Bet_Abba_Libanos.jpg?width=1600',
+    alt: 'Rock-hewn church of Bet Abba Libanos in Lalibela, Ethiopia',
+    credit: 'Damien Halleux Radermecker · CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Churches_of_Lalibela_-_Bet_Abba_Libanos.jpg',
+  },
+  {
+    title: 'Bet Medhane Alem Church',
+    amTitle: 'ቤተ መድኃኔ ዓለም ቤተ ክርስቲያን',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bet_Medhane_Alem_church_Lalibela.jpg?width=1400',
+    alt: 'Bet Medhane Alem rock-hewn church in Lalibela',
+    credit: 'Giustino · CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Bet_Medhane_Alem_church_Lalibela.jpg',
+  },
+  {
+    title: 'Highland Mountains of Lalibela',
+    amTitle: 'የላሊበላ ደጋማ ተራሮች',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/View_of_Mountains%2C_Facing_Northwest_from_Lalibela.jpg?width=1600',
+    alt: 'Mountain landscape viewed from Lalibela, Ethiopia',
+    credit: 'RNLockwood · CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:View_of_Mountains,_Facing_Northwest_from_Lalibela.jpg',
+  },
+  {
+    title: 'Lalibela Town Skyline',
+    amTitle: 'የላሊበላ ከተማ እይታ',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Skyline_Lalibela_01.jpg?width=1600',
+    alt: 'Townscape of Lalibela in the Ethiopian highlands',
+    credit: 'Armin Hamm · CC BY-SA 2.5',
+    source: 'https://commons.wikimedia.org/wiki/File:Skyline_Lalibela_01.jpg',
+  },
+  {
+    title: 'Landscape Around Lalibela',
+    amTitle: 'በላሊበላ ዙሪያ ያለው መልክዓ ምድር',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lalibela_Ethiopia_landscape_%286%29.jpg?width=1600',
+    alt: 'Landscape and settlement around Lalibela, Ethiopia',
+    credit: 'Radosław Botev · CC BY 3.0 PL',
+    source: 'https://commons.wikimedia.org/wiki/File:Lalibela_Ethiopia_landscape_(6).jpg',
+  },
+  {
+    title: 'Northern Stelae Park, Aksum',
+    amTitle: 'የሰሜን ሐውልቶች ፓርክ፣ አክሱም',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/ET_Axum_asv2018-01_img37_Stelae_Park.jpg?width=1600',
+    alt: 'Ancient stelae at the Northern Stelae Park in Aksum, Tigray',
+    credit: 'A.Savin · Free Art License',
+    source: 'https://commons.wikimedia.org/wiki/File:ET_Axum_asv2018-01_img37_Stelae_Park.jpg',
+  },
+  {
+    title: 'Simien Mountains',
+    amTitle: 'የሰሜን ተራሮች',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Simien_mountains.jpg?width=1600',
+    alt: 'Mountain scenery in the Simien Mountains of Ethiopia',
+    credit: 'Indrik myneur · CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Simien_mountains.jpg',
+  },
+  {
+    title: 'Aksum, Ethiopia',
+    amTitle: 'አክሱም፣ ኢትዮጵያ',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Axum%2C_Ethiopia_%2827167570040%29.jpg?width=1600',
+    alt: 'View of Aksum in northern Ethiopia',
+    credit: 'Mike Cotterill · CC0 1.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Axum,_Ethiopia_(27167570040).jpg',
+  },
+]
+
+const articlePhotoByCategory: Record<string, string> = {
+  History: ethiopiaPhotos[6].image,
+  'People & Culture': ethiopiaPhotos[0].image,
+  Music: ethiopiaPhotos[0].image,
+  Nature: ethiopiaPhotos[7].image,
+  'Heritage & Travel': ethiopiaPhotos[1].image,
+  'Economy & Opportunity': ethiopiaPhotos[4].image,
+  'Modern Ethiopia': ethiopiaPhotos[8].image,
+}
 
 const categories = ['All', 'History', 'People & Culture', 'Music', 'Nature', 'Heritage & Travel', 'Economy & Opportunity', 'Modern Ethiopia']
 
@@ -44,7 +139,16 @@ type Props = { language: Language; onLanguageChange: () => void }
 export default function EthiopiaPage({ language, onLanguageChange }: Props) {
   const [category, setCategory] = useState('All')
   const [search, setSearch] = useState('')
+  const [activePhoto, setActivePhoto] = useState(0)
   const isAm = language === 'am'
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActivePhoto((current) => (current + 1) % ethiopiaPhotos.length)
+    }, 5500)
+    return () => window.clearInterval(timer)
+  }, [])
+
   const visibleArticles = useMemo(() => articles.filter((article) => {
     const matchesCategory = category === 'All' || article.category === category
     const title = isAm ? article.amTitle : article.title
@@ -67,7 +171,10 @@ export default function EthiopiaPage({ language, onLanguageChange }: Props) {
       <header className="heritage-header">
         <a className="brand" href="#home" aria-label="OZEN Trading home">
           <span className="brand-mark">O</span>
-          <span className="brand-name">OZEN <small>TRADING PLC</small></span>
+          <span className={`brand-name ${isAm ? 'amharic-brand' : ''}`}>
+            {isAm ? 'ኦዜን ትሬዲንግ' : 'OZEN TRADING'}
+            <small>{isAm ? 'ኋ/የተ/የግ/ማህበር' : 'PLC'}</small>
+          </span>
         </a>
         <div className="heritage-header-actions">
           <a className="heritage-back" href="#home">{isAm ? '← ወደ ዋናው ገጽ' : '← Back to OZEN'}</a>
@@ -81,6 +188,64 @@ export default function EthiopiaPage({ language, onLanguageChange }: Props) {
           <h1>{isAm ? 'ኢትዮጵያ፦ ቅርሳችን፣ ኩራታችን፣ የወደፊት ተስፋችን' : 'Ethiopia: Our Heritage, Our Pride, Our Future'}</h1>
           <p>{isAm ? 'የኢትዮጵያን ታሪክ፣ ሕዝቦች፣ ባህሎች፣ ተፈጥሮና የወደፊት ዕድሎች በእውቀት፣ በአክብሮትና በጥንቃቄ እናቀርባለን።' : 'Discover Ethiopia’s history, peoples, cultures, landscapes and future opportunities through carefully prepared stories rooted in respect, curiosity and credible research.'}</p>
           <a className="button button-gold" href="#heritage-stories">{isAm ? 'ታሪኮቹን ያስሱ' : 'Explore the stories'} <span>↓</span></a>
+        </div>
+      </section>
+
+
+      <section className="heritage-gallery-section" aria-label={isAm ? 'የኢትዮጵያ ፎቶ ማዕከል' : 'Ethiopia photo gallery'}>
+        <div className="heritage-gallery-wrap">
+          <div className="heritage-gallery-heading">
+            <span className="section-label">{isAm ? 'እውነተኛ የኢትዮጵያ ምስሎች' : 'REAL PHOTOGRAPHY FROM ETHIOPIA'}</span>
+            <h2>{isAm ? 'ኢትዮጵያን በምስል ያግኙ።' : 'Experience Ethiopia in photographs.'}</h2>
+            <p>{isAm ? 'ታሪካዊ ቦታዎችን፣ ባህልንና የተፈጥሮ ውበትን በእውነተኛ ፎቶዎች ይመልከቱ።' : 'Explore heritage sites, culture and landscapes through real photographs with source and photographer credits.'}</p>
+          </div>
+          <div className="heritage-photo-carousel">
+            <img
+              key={ethiopiaPhotos[activePhoto].image}
+              src={ethiopiaPhotos[activePhoto].image}
+              alt={ethiopiaPhotos[activePhoto].alt}
+              loading="lazy"
+            />
+            <div className="heritage-photo-shade" />
+            <div className="heritage-photo-caption">
+              <span>{String(activePhoto + 1).padStart(2, '0')} / {String(ethiopiaPhotos.length).padStart(2, '0')}</span>
+              <h3>{isAm ? ethiopiaPhotos[activePhoto].amTitle : ethiopiaPhotos[activePhoto].title}</h3>
+              <a href={ethiopiaPhotos[activePhoto].source} target="_blank" rel="noreferrer">
+                {isAm ? 'የፎቶ ምንጭና ፈቃድ' : 'Photo source & license'} · {ethiopiaPhotos[activePhoto].credit}
+              </a>
+            </div>
+            <div className="heritage-photo-controls">
+              <button type="button" aria-label={isAm ? 'ቀዳሚ ፎቶ' : 'Previous photo'} onClick={() => setActivePhoto((activePhoto - 1 + ethiopiaPhotos.length) % ethiopiaPhotos.length)}>‹</button>
+              <button type="button" aria-label={isAm ? 'ቀጣይ ፎቶ' : 'Next photo'} onClick={() => setActivePhoto((activePhoto + 1) % ethiopiaPhotos.length)}>›</button>
+            </div>
+          </div>
+          <div className="heritage-photo-dots">
+            {ethiopiaPhotos.map((photo, index) => (
+              <button
+                key={photo.title}
+                type="button"
+                className={index === activePhoto ? 'active' : ''}
+                aria-label={`${isAm ? 'ፎቶ' : 'Photo'} ${index + 1}`}
+                aria-pressed={index === activePhoto}
+                onClick={() => setActivePhoto(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="heritage-film-section">
+        <div className="heritage-film-wrap">
+          <div>
+            <span className="section-label">{isAm ? 'የኦዜን ማስተዋወቂያ ፊልም' : 'OZEN ETHIOPIA FILM'}</span>
+            <h2>{isAm ? 'የኢትዮጵያን ታሪክና ውበት በቪዲዮ እናቀርባለን።' : 'Ethiopia’s story, brought to life on film.'}</h2>
+            <p>{isAm ? 'የኦዜን የማስተዋወቂያ ቪዲዮ በምርት ዝግጅት ላይ ነው። የተረጋገጡ ምስሎችን፣ ታሪኮችንና የኩባንያውን ራዕይ አካትተን እናዘጋጃለን።' : 'The official OZEN promotional film is planned for production. It will bring together verified footage, Ethiopia’s stories and the company’s vision.'}</p>
+            <span className="heritage-film-status">{isAm ? 'በዝግጅት ላይ' : 'COMING SOON'}</span>
+          </div>
+          <div className="heritage-film-poster" role="img" aria-label={isAm ? 'የኢትዮጵያ የቪዲዮ ማስተዋወቂያ ምስል' : 'Ethiopia promotional film preview'}>
+            <span className="heritage-film-play" aria-hidden="true">▶</span>
+            <span>{isAm ? 'የኢትዮጵያ ታሪክ' : 'DISCOVER ETHIOPIA'}</span>
+          </div>
         </div>
       </section>
 
@@ -127,7 +292,14 @@ export default function EthiopiaPage({ language, onLanguageChange }: Props) {
           <div className="heritage-article-grid">
             {visibleArticles.map((article) => (
               <article className="heritage-article" key={article.id}>
-                <div className="heritage-article-art"><span>OZEN CONNECT · ETHIOPIA {String(article.id).padStart(2, '0')}</span></div>
+                <div className="heritage-article-art">
+                  <img
+                    src={articlePhotoByCategory[article.category] || ethiopiaPhotos[0].image}
+                    alt={isAm ? article.amTitle : article.title}
+                    loading="lazy"
+                  />
+                  <span>OZEN CONNECT · ETHIOPIA {String(article.id).padStart(2, '0')}</span>
+                </div>
                 <div className="heritage-article-body">
                   <small>{isAm ? amCategories[article.category] : article.category}</small>
                   <h3>{isAm ? article.amTitle : article.title}</h3>
@@ -155,7 +327,7 @@ export default function EthiopiaPage({ language, onLanguageChange }: Props) {
         <a className="button button-gold" href="#contact">{isAm ? 'ከOZEN ጋር ይገናኙ' : 'Connect with OZEN'} <span>↗</span></a>
       </section>
       <footer className="heritage-footer">
-        <span>© {new Date().getFullYear()} Ozen Trading PLC</span>
+        <span>© {new Date().getFullYear()} {isAm ? 'ኦዜን ትሬዲንግ' : 'OZEN TRADING PLC'}</span>
         <span>{isAm ? 'ኢትዮጵያ፦ ቅርሳችን፣ ኩራታችን።' : 'Ethiopia: Our Heritage, Our Pride.'}</span>
         <a href="#home">{isAm ? 'ወደ ዋናው ገጽ ↑' : 'Back to OZEN ↑'}</a>
       </footer>

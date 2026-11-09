@@ -198,8 +198,9 @@ function App() {
       <header className="site-header">
         <a className="brand" href="#home" aria-label="Ozen Trading home">
           <span className="brand-mark">O</span>
-          <span className="brand-name">
-            OZEN <small>TRADING PLC</small>
+          <span className={`brand-name ${language === 'am' ? 'amharic-brand' : ''}`}>
+            {language === 'am' ? 'ኦዜን ትሬዲንግ' : 'OZEN TRADING'}
+            <small>{language === 'am' ? 'ኋ/የተ/የግ/ማህበር' : 'PLC'}</small>
           </span>
         </a>
 
@@ -232,6 +233,9 @@ function App() {
             <span className="ethiopian-stripe" />
             {t.heroTag}
           </span>
+          <div className={`hero-company-name ${language === 'am' ? 'amharic-brand' : ''}`}>
+            {language === 'am' ? 'ኦዜን ትሬዲንግ ኋ/የተ/የግ/ማህበር' : 'OZEN TRADING PLC'}
+          </div>
           <h1>{t.heroTitle}</h1>
           <p>{t.heroText}</p>
           <div className="hero-actions">
@@ -406,7 +410,10 @@ function App() {
       <footer className="site-footer">
         <a className="brand footer-brand" href="#home">
           <span className="brand-mark">O</span>
-          <span className="brand-name">OZEN <small>TRADING PLC</small></span>
+          <span className={`brand-name ${language === 'am' ? 'amharic-brand' : ''}`}>
+            {language === 'am' ? 'ኦዜን ትሬዲንግ' : 'OZEN TRADING'}
+            <small>{language === 'am' ? 'ኋ/የተ/የግ/ማህበር' : 'PLC'}</small>
+          </span>
         </a>
         <p>{t.footer}</p>
         <span>© {currentYear} Ozen Trading PLC. {t.rights}</span>

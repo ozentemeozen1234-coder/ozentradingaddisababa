@@ -1022,3 +1022,286 @@ a {
 .heritage-footer { padding:25px 7%; background:#0a162c; color:#b8c2d1; display:flex; justify-content:space-between; flex-wrap:wrap; gap:15px; font-size:10px; }
 @media(max-width:850px){.heritage-category-grid,.heritage-article-grid{grid-template-columns:repeat(2,1fr)}.heritage-story-head{align-items:flex-start; flex-direction:column}}
 @media(max-width:560px){.heritage-header{padding:14px 5%; flex-wrap:wrap}.heritage-hero{min-height:570px;padding:65px 7%}.heritage-hero h1{font-size:43px}.heritage-section,.heritage-story-wrap{width:88%;padding:62px 0}.heritage-category-grid,.heritage-article-grid{grid-template-columns:1fr}.heritage-category{min-height:145px}.heritage-story-head{gap:15px}.heritage-search{width:100%}}
+
+
+/* Language-aware OZEN company wordmark */
+.brand-name.amharic-brand {
+  font-family: 'Noto Sans Ethiopic', sans-serif;
+  letter-spacing: 0;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.brand-name.amharic-brand small {
+  font-size: 9px;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+.hero-company-name {
+  margin-top: 28px;
+  color: #f1d69b;
+  font-size: clamp(20px, 2.8vw, 31px);
+  font-weight: 800;
+  letter-spacing: 3px;
+  line-height: 1.35;
+  text-shadow: 0 3px 18px rgba(0,0,0,.2);
+}
+.hero-company-name.amharic-brand {
+  max-width: 720px;
+  font-family: 'Noto Sans Ethiopic', sans-serif;
+  font-size: clamp(19px, 2.6vw, 29px);
+  letter-spacing: 0;
+  line-height: 1.7;
+}
+.hero-content h1 {
+  margin-top: 17px;
+}
+@media (max-width: 600px) {
+  .brand-name.amharic-brand {
+    max-width: 235px;
+    font-size: 12px;
+  }
+  .brand-name.amharic-brand small {
+    font-size: 8px;
+  }
+  .hero-company-name,
+  .hero-company-name.amharic-brand {
+    font-size: 19px;
+    letter-spacing: 0;
+  }
+}
+
+/* Ethiopia real-photo carousel */
+.heritage-gallery-section {
+  padding: 78px 0 82px;
+  background: #f7f5ef;
+}
+.heritage-gallery-wrap {
+  width: min(1160px, 86%);
+  margin: 0 auto;
+}
+.heritage-gallery-heading {
+  max-width: 760px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+.heritage-gallery-heading h2 {
+  margin: 14px 0;
+  color: var(--navy);
+  font-size: clamp(29px, 4vw, 44px);
+  line-height: 1.25;
+}
+.heritage-gallery-heading p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.85;
+}
+.heritage-photo-carousel {
+  position: relative;
+  height: clamp(330px, 48vw, 570px);
+  overflow: hidden;
+  border-radius: 9px;
+  background: var(--navy);
+  box-shadow: 0 20px 48px rgba(16,31,59,.16);
+}
+.heritage-photo-carousel > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: showcase-fade .55s ease;
+}
+.heritage-photo-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(7,18,35,.76), transparent 82%), linear-gradient(0deg, rgba(7,18,35,.68), transparent 58%);
+}
+.heritage-photo-caption {
+  position: absolute;
+  z-index: 1;
+  left: clamp(22px, 5vw, 58px);
+  right: 100px;
+  bottom: clamp(25px, 5vw, 52px);
+  color: #fff;
+}
+.heritage-photo-caption > span {
+  color: #e8ca87;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.heritage-photo-caption h3 {
+  margin: 10px 0;
+  font-size: clamp(25px, 4vw, 40px);
+  line-height: 1.3;
+}
+.heritage-photo-caption a {
+  display: inline-block;
+  color: #e4e9f0;
+  font-size: 11px;
+  line-height: 1.6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.heritage-photo-controls {
+  position: absolute;
+  z-index: 2;
+  right: 22px;
+  bottom: 22px;
+  display: flex;
+  gap: 8px;
+}
+.heritage-photo-controls button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 50%;
+  background: rgba(16,31,59,.45);
+  color: white;
+  font-size: 27px;
+  cursor: pointer;
+}
+.heritage-photo-controls button:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+.heritage-photo-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+.heritage-photo-dots button {
+  width: 22px;
+  height: 4px;
+  padding: 0;
+  border: 0;
+  background: #d6d8dc;
+  cursor: pointer;
+}
+.heritage-photo-dots button.active {
+  width: 40px;
+  background: var(--gold);
+}
+.heritage-article-art {
+  position: relative;
+  min-height: 190px;
+  overflow: hidden;
+  background: #d9d5c9;
+}
+.heritage-article-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+.heritage-article:hover .heritage-article-art img {
+  transform: scale(1.04);
+}
+.heritage-article-art > span {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  padding: 6px 8px;
+  border-radius: 2px;
+  background: rgba(9,23,44,.72);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+/* Promotional film slot is marked as planned until the approved video master is supplied. */
+.heritage-film-section {
+  padding: 78px 0;
+  background: #fff;
+}
+.heritage-film-wrap {
+  width: min(1160px, 86%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 48px;
+}
+.heritage-film-wrap h2 {
+  margin: 16px 0;
+  color: var(--navy);
+  font-size: clamp(29px, 3.8vw, 42px);
+  line-height: 1.35;
+}
+.heritage-film-wrap p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.heritage-film-status {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 9px 14px;
+  background: var(--navy);
+  color: #f0d69e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+.heritage-film-poster {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(0deg, rgba(8,20,40,.76), rgba(8,20,40,.25)), url('https://commons.wikimedia.org/wiki/Special:FilePath/View_of_Mountains%2C_Facing_Northwest_from_Lalibela.jpg?width=1400') center/cover;
+  box-shadow: 0 18px 42px rgba(16,31,59,.15);
+}
+.heritage-film-play {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  padding-left: 4px;
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 50%;
+  background: rgba(200,164,93,.9);
+  color: var(--navy);
+  font-size: 20px;
+}
+.amharic .heritage-gallery-heading h2,
+.amharic .heritage-photo-caption h3,
+.amharic .heritage-film-wrap h2 {
+  line-height: 1.55;
+}
+@media (max-width: 700px) {
+  .heritage-gallery-section,
+  .heritage-film-section {
+    padding: 58px 0;
+  }
+  .heritage-photo-carousel {
+    height: 420px;
+  }
+  .heritage-photo-caption {
+    left: 18px;
+    right: 18px;
+    bottom: 82px;
+  }
+  .heritage-photo-caption a {
+    font-size: 9px;
+  }
+  .heritage-photo-controls {
+    right: 16px;
+    bottom: 14px;
+  }
+  .heritage-film-wrap {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .heritage-film-poster {
+    min-height: 230px;
+  }
+}
