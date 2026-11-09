@@ -1,12 +1,13 @@
 
 import { useEffect, useState } from 'react'
 import './App.css'
+import EthiopiaPage from './EthiopiaPage'
 
 type Language = 'en' | 'am'
 
 const content = {
   en: {
-    nav: ['Home', 'About Us', 'Our Businesses', 'Our Locations', 'Contact'],
+    nav: ['Home', 'About Us', 'Our Businesses', 'Ethiopia', 'Our Locations', 'Contact'],
     heroTag: 'ETHIOPIAN ROOTS. GLOBAL AMBITION.',
     heroTitle: 'Connecting Ethiopia to Global Opportunities.',
     heroText:
@@ -62,7 +63,7 @@ const content = {
     rights: 'All rights reserved.',
   },
   am: {
-    nav: ['መነሻ', 'ስለ እኛ', 'የንግድ ዘርፎች', 'አድራሻዎቻችን', 'ያግኙን'],
+    nav: ['መነሻ', 'ስለ እኛ', 'የንግድ ዘርፎች', 'ኢትዮጵያ', 'አድራሻዎቻችን', 'ያግኙን'],
     heroTag: 'ኢትዮጵያዊ መሠረት። ዓለም አቀፍ ራዕይ።',
     heroTitle: 'ኢትዮጵያን ከዓለም አቀፍ የንግድ ዕድሎች ጋር እናገናኛለን።',
     heroText:
@@ -167,7 +168,16 @@ const currentYear = new Date().getFullYear()
 function App() {
   const [language, setLanguage] = useState<Language>('en')
   const [activeSlide, setActiveSlide] = useState(0)
+  const [showEthiopiaPage, setShowEthiopiaPage] = useState(
+    typeof window !== 'undefined' && ['#ethiopia', '#heritage-stories'].includes(window.location.hash),
+  )
   const t = content[language]
+
+  useEffect(() => {
+    const syncPage = () => setShowEthiopiaPage(['#ethiopia', '#heritage-stories'].includes(window.location.hash))
+    window.addEventListener('hashchange', syncPage)
+    return () => window.removeEventListener('hashchange', syncPage)
+  }, [])
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -178,6 +188,10 @@ function App() {
   }, [])
 
   const currentSlide = showcaseSlides[activeSlide]
+
+  if (showEthiopiaPage) {
+    return <EthiopiaPage language={language} onLanguageChange={() => setLanguage(language === 'en' ? 'am' : 'en')} />
+  }
 
   return (
     <main className={language === 'am' ? 'site amharic' : 'site'}>
@@ -191,7 +205,7 @@ function App() {
 
         <nav className="main-nav" aria-label="Main navigation">
           {t.nav.map((item, index) => (
-            <a key={item} href={['#home', '#about', '#business', '#locations', '#contact'][index]}>
+            <a key={item} href={['#home', '#about', '#business', '#ethiopia', '#locations', '#contact'][index]}>
               {item}
             </a>
           ))}
@@ -324,6 +338,9 @@ function App() {
             <span>MEKELE</span>
             <span>ETHIOPIA</span>
           </div>
+          <a className="button button-gold ethiopia-explore" href="#ethiopia">
+            {language === 'am' ? 'የኢትዮጵያን ታሪክና ባህል ያስሱ' : 'Explore Ethiopia’s Heritage'} <span>↗</span>
+          </a>
         </div>
       </section>
 
