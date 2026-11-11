@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import EthiopiaPage from './EthiopiaPage'
-
+import { testSupabaseConnection } from './lib/supabase'
+import InquiryForms from './InquiryForms'
 type Language = 'en' | 'am'
 
 const content = {
@@ -166,6 +167,9 @@ const showcaseSlides = [
 const icons = ['↗', '⇧', '⌘', '⌂', '⇄', '◇']
 const currentYear = new Date().getFullYear()
 function App() {
+  useEffect(() => {
+  void testSupabaseConnection()
+}, [])
   const [language, setLanguage] = useState<Language>('en')
   const [activeSlide, setActiveSlide] = useState(0)
   const [showEthiopiaPage, setShowEthiopiaPage] = useState(
@@ -382,30 +386,41 @@ function App() {
         </div>
       </section>
 
-      <section className="contact-section" id="contact">
-        <div className="section-wrap contact-layout">
-          <div className="contact-intro">
-            <span className="section-label">{t.contactLabel}</span>
-            <h2>{t.contactTitle}</h2>
-            <p>{t.contactText}</p>
-          </div>
-          <div className="contact-details">
-            <div>
-              <span>{t.email}</span>
-              <a href="mailto:ozentradingplc.ethio@gmail.com">ozentradingplc.ethio@gmail.com</a>
-            </div>
-            <div>
-              <span>{t.phone}</span>
-              <a href="tel:+251910507112">+251 91 050 7112</a>
-              <a href="tel:+251962627848">+251 96 262 7848</a>
-            </div>
-            <div>
-              <span>{t.address}</span>
-              <p>Bole Sub-City, Woreda 04, Addis Ababa, Ethiopia</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    
+<section className="contact-section" id="contact">
+  <div className="section-wrap contact-layout">
+    <div className="contact-intro">
+      <span className="section-label">{t.contactLabel}</span>
+      <h2>{t.contactTitle}</h2>
+      <p>{t.contactText}</p>
+    </div>
+
+    <div className="contact-details">
+      <div>
+        <span>{t.email}</span>
+        <a href="mailto:ozentradingplc.ethio@gmail.com">
+          ozentradingplc.ethio@gmail.com
+        </a>
+      </div>
+
+      <div>
+        <span>{t.phone}</span>
+        <a href="tel:+251910507112">+251 91 050 7112</a>
+        <a href="tel:+251962627848">+251 96 262 7848</a>
+      </div>
+
+      <div>
+        <span>{t.address}</span>
+        <p>Bole Sub-City, Woreda 04, Addis Ababa, Ethiopia</p>
+      </div>
+    </div>
+  </div>
+
+  <div className="section-wrap">
+    <InquiryForms language={language} />
+  </div>
+</section>
+
 
       <footer className="site-footer">
         <a className="brand footer-brand" href="#home">

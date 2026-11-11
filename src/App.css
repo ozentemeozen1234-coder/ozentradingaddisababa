@@ -1305,3 +1305,143 @@ a {
     min-height: 230px;
   }
 }
+
+/* OZEN CONNECT - Business Inquiry Form */
+
+.inquiry-form-wrap {
+  max-width: 820px;
+  margin: 70px auto 20px;
+  padding: 42px;
+  background: #ffffff;
+  border: 1px solid rgba(16, 31, 59, 0.1);
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(16, 31, 59, 0.08);
+}
+
+.inquiry-form-wrap h3 {
+  color: #101f3b;
+  font-size: 28px;
+  margin: 0 0 12px;
+}
+
+.inquiry-form-wrap > p {
+  color: #667085;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.inquiry-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.inquiry-form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  color: #101f3b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.inquiry-form input:not([type="checkbox"]),
+.inquiry-form select,
+.inquiry-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid #d9dee8;
+  border-radius: 9px;
+  background: #fbfcfe;
+  color: #101f3b;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.inquiry-form input:focus,
+.inquiry-form select:focus,
+.inquiry-form textarea:focus {
+  border-color: #c8a45d;
+  box-shadow: 0 0 0 3px rgba(200, 164, 93, 0.15);
+}
+
+.inquiry-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.inquiry-form > label:has(textarea),
+.inquiry-form .inquiry-consent,
+.inquiry-form > button,
+.inquiry-form > p {
+  grid-column: 1 / -1;
+}
+
+.inquiry-form .inquiry-consent {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.inquiry-consent input {
+  margin-top: 4px;
+  accent-color: #c8a45d;
+}
+
+.inquiry-form > button {
+  padding: 15px 24px;
+  border: none;
+  border-radius: 9px;
+  background: #101f3b;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.inquiry-form > button:hover:not(:disabled) {
+  background: #c8a45d;
+  color: #101f3b;
+  transform: translateY(-2px);
+}
+
+.inquiry-form > button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.inquiry-success {
+  color: #167647;
+  font-weight: 600;
+}
+
+.inquiry-error {
+  color: #b42318;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .inquiry-form-wrap {
+    margin: 40px 0 15px;
+    padding: 24px 18px;
+  }
+
+  .inquiry-form-wrap h3 {
+    font-size: 23px;
+  }
+
+  .inquiry-form {
+    grid-template-columns: 1fr;
+  }
+
+  .inquiry-form > label,
+  .inquiry-form > button,
+  .inquiry-form > p {
+    grid-column: 1;
+  }
+}

@@ -27,3 +27,9 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Supabase local secrets and temporary files
+supabase/functions/.env
+supabase/.temp/
+supabase/.branches/
+
